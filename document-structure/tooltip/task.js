@@ -2,6 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	const tooltipTrigger = document.querySelector('.has-tooltip');
 	const tooltip = document.querySelector('.tooltip');
 
+	if (!tooltipTrigger || !tooltip) return;
+
+	const closeTooltip = () => {
+		tooltip.classList.remove('tooltip_active');
+	};
+
 	tooltipTrigger.addEventListener('click', (event) => {
 		event.preventDefault();
 
@@ -16,8 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 
 	document.addEventListener('click', (event) => {
-		if (!tooltipTrigger.contains(event.target) && !tooltip.contains(event.target)) {
-			tooltip.classList.remove('tooltip_active');
+		if (tooltipTrigger && tooltip && !tooltipTrigger.contains(event.target) && !tooltip.contains(event.target)) {
+			closeTooltip();
 		};
 	});
 });
