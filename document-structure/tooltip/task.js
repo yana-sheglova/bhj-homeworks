@@ -1,8 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
 	const tooltipTriggers = document.querySelectorAll('.has-tooltip');
-	const tooltip = document.querySelector('.tooltip');
+	let tooltip = document.querySelector('.tooltip');
 
-	if (!tooltip) return;
+	if (!tooltip) {
+		tooltip =  document.createElement('div');
+		tooltip.classList.add('.tooltip');
+		document.body.appendChild(tooltip);
+	};
 
 	const closeTooltip = () => {
 		tooltip.classList.remove('tooltip_active');
