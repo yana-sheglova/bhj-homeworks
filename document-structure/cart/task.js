@@ -32,16 +32,14 @@ document.addEventListener('DOMContentLoaded', () => {
 				const productCountElem = existingProduct.querySelector('.cart__product-count');
 				productCountElem.textContent = parseInt(productCountElem.textContent, 10) + quantity;
 			} else {
-				const cartProduct = document.createElement('div');
-				cartProduct.classList.add('cart__product');
-				cartProduct.setAttribute('data-id', productId);
-
-				cartProduct.innerHTML = `
-            <img class="cart__product-image" src="${productImage}" alt="Product Image">
-            <div class="cart__product-count">${quantity}</div>
-        `;
-
-				cartProductsContainer.appendChild(cartProduct);
+				const cartProductHTML = `
+				<div class="cart__product" data-id="${productId}">
+				    <img class="cart__product-image" src="${productImage}" alt="Product Image">
+					<div class="cart__product-count">${quantity}</div>
+				</div>
+				`;
+	
+				cartProductsContainer.insertAdjacentHTML('beforeend', cartProductHTML);
 			}
 
 			quantity = 1;
