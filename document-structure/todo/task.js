@@ -11,25 +11,21 @@ taskForm.addEventListener('submit', function(event) {
 });
 
 function addTask(taskTitle) {
-	const tasksList = document.getElementById('tasks__list');
-	const taskDiv = document.createElement('div');
-	taskDiv.className = 'task';
+	const taskHTML = `
+	<div class="task">
+	    <div class="task__title">${taskTitle}</div>
+		<a href="#" class="task__remove">&times;</a>
+	</div>
+	`;
 
-	const titleDiv = document.createElement('div');
-	titleDiv.className = 'task__title';
-	titleDiv.textContent = taskTitle;
-	taskDiv.appendChild(titleDiv);
+	tasksList.insertAdjacentHTML('beforeend', taskHTML);
 
-	const removeLink = document.createElement('a');
-	removeLink.href = '#';
-	removeLink.className = 'task__remove';
-	removeLink.innerHTML = '&times;';
-
+	const removeLink = tasksList.querySelector('.task:last-child .task__remove');
 	removeLink.addEventListener('click', function(event) {
 		event.preventDefault();
-		tasksList.removeChild(taskDiv);
+		const taskDiv = removeLink.closest('.task');
+		if (taskDiv) {
+			tasksList.removeChild(taskDiv);
+		}
 	});
-
-	taskDiv.appendChild(removeLink);
-	tasksList.appendChild(taskDiv);
 };
